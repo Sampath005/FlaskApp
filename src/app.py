@@ -11,7 +11,9 @@ def hello():
 def hello():
     return 'Hello, Sampath!'
 
-
+@app.route('/sathiya')
+def hello():
+    return 'Hello, Sathiya!'
 
 if __name__ == '__main__':
     app.run(debug=True)
