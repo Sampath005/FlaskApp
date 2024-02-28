@@ -41,13 +41,8 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd new/FlaskApp/
-          # Check for local changes
-          if [[ $(git status --porcelain) ]]; then
-            # Stash local changes
-            git stash
-          fi
-          # Pull latest changes from the repository
-          git pull origin master  # Assuming your code is on the master branch
+          # Pull latest changes from the repository and rebase local changes
+          git pull --rebase origin master
           # Any additional deployment steps, e.g., restarting services, etc.
           # Install dependencies using pipenv
           pipenv install
