@@ -15,7 +15,7 @@ def hello_sam():
 def hello_sathya():
     return 'Hello, Sathiya!'
 
-@app.route('/sathiya')
+@app.route('/saravanan')
 def hello_saravanan():
     return 'Hello, Saravanan!'
     
