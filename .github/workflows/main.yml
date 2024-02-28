@@ -30,3 +30,13 @@ jobs:
       run: |
         pip install pytest
         pytest
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST_NAME }}
+        username: ${{ secrets.USER_NAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd cd new/FlaskApp/
+          git pull origin master  # Assuming your code is on the master branch
+          # Any additional deployment steps, e.g., restarting services, etc.
