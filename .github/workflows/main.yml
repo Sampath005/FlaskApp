@@ -38,5 +38,11 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd new/FlaskApp/
-          git pull  # Assuming your code is on the master branch
+          # Check for local changes
+          if [[ $(git status --porcelain) ]]; then
+            # Stash local changes
+            git stash
+          fi
+          # Pull latest changes from the repository
+          git pull origin master  # Assuming your code is on the master branch
           # Any additional deployment steps, e.g., restarting services, etc.
