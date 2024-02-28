@@ -18,6 +18,10 @@ def hello_sathya():
 @app.route('/saravanan')
 def hello_saravanan():
     return 'Hello, Saravanan!'
+
+@app.route('/sakthivel')
+def hello_sakthivel():
+    return 'Hello, sakthivel!'
     
 if __name__ == '__main__':
     app.run(debug=True, port=8085)
