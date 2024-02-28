@@ -15,5 +15,9 @@ def hello_sam():
 def hello_sathya():
     return 'Hello, Sathiya!'
 
+@app.route('/sathiya')
+def hello_saravanan():
+    return 'Hello, Saravanan!'
+    
 if __name__ == '__main__':
     app.run(debug=True, port=8085)
