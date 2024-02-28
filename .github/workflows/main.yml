@@ -46,3 +46,15 @@ jobs:
           # Pull latest changes from the repository
           git pull origin master  # Assuming your code is on the master branch
           # Any additional deployment steps, e.g., restarting services, etc.
+                # Install dependencies using pipenv
+          pipenv install
+          # Activate the virtual environment
+          pipenv shell
+          # Stop the backend service
+          sudo systemctl stop backend.service
+          # Reload the systemd daemon
+          sudo systemctl daemon-reload
+          # Restart the backend service
+          sudo systemctl restart backend.service
+          # Check the status of the backend service
+          sudo systemctl status backend.service
