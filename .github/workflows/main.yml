@@ -37,6 +37,6 @@ jobs:
         username: ${{ secrets.USER_NAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd cd new/FlaskApp/
+          cd new/FlaskApp/
           git pull  # Assuming your code is on the master branch
           # Any additional deployment steps, e.g., restarting services, etc.
