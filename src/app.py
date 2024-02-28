@@ -24,9 +24,9 @@ def hello_saravanan():
 def hello_sakthivel():
     return 'Hello, sakthivel! '
 
-@app.route('/pandas')
-def pandas():
-    return pd.Series(range(1, 11))
+@app.route('/range')
+def range():
+    return [str(i) for i in range(1, 11)]
     
 if __name__ == '__main__':
     app.run(debug=True, port=8085)
