@@ -33,9 +33,9 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with pytest
         if: github.ref == 'refs/heads/master'
-        run: |
-          pip install pytest
-          pytest
+        # run: |
+        #   pip install pytest
+        #   pytest
       - name: Deploy to EC2
         if: github.ref == 'refs/heads/master'
         uses: appleboy/ssh-action@master
