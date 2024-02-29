@@ -23,10 +23,6 @@ def hello_saravanan():
 @app.route('/sakthivel')
 def hello_sakthivel():
     return 'Hello, sakthivel! '
-
-@app.route('/range')
-def range_():
-    return [str(i) for i in range(1, 11)]
     
 if __name__ == '__main__':
     app.run(debug=True, port=8085)
