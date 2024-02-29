@@ -57,5 +57,5 @@ jobs:
           sudo systemctl daemon-reload
           # Restart the backend service
           sudo systemctl restart backend.service
-          # Check the status of the backend service
+          # Check the  status of the backend service
           sudo systemctl status backend.service
