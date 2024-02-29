@@ -49,8 +49,10 @@ jobs:
           # Any additional deployment steps, e.g., restarting services, etc.
           # Install dependencies using pipenv
           pipenv install
+           # Set non-interactive TERM variable
+          export TERM=dumb
           # Activate the virtual environment
-          pipenv run
+          pipenv shell
           # Stop the backend service
           sudo systemctl stop backend.service
           # Reload the systemd daemon
