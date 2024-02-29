@@ -46,13 +46,6 @@ jobs:
           cd new/FlaskApp/
           # Pull latest changes from the repository and rebase local changes
           git pull --rebase origin master
-          # Any additional deployment steps, e.g., restarting services, etc.
-          # Install dependencies using pipenv
-          pipenv install
-          #  # Set non-interactive TERM variable
-          # export TERM=dumb
-          # # Activate the virtual environment
-          # pipenv shell
           # Stop the backend service
           sudo systemctl stop backend.service
           # Reload the systemd daemon
