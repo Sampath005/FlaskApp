@@ -4,55 +4,56 @@ on:
   push:
     branches:
       - master
+      - '*'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        git fetch --prune --unshallow
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.10.13
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install --upgrade pipenv
-        # Install dependencies using pipenv
-        pipenv install
-
-    - name: Lint with flake8
-      run: |
-        pip install flake8
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    # - name: Test with pytest
-    #   run: |
-    #     pip install pytest
-    #     pytest
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST_NAME }}
-        username: ${{ secrets.USER_NAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd new/FlaskApp/
-          # Pull latest changes from the repository and rebase local changes
-          git pull --rebase origin master
+      - uses: actions/checkout@v2
+      - run: |
+          git fetch --prune --unshallow
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.10.13
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade pipenv
+          # Install dependencies using pipenv
           pipenv install
-          source /home/ubuntu/.local/share/virtualenvs/FlaskApp-WAvWhMNg/bin/activate 
-          # Stop the backend service
-          sudo systemctl stop backend.service
-          # Reload the systemd daemon
-          sudo systemctl daemon-reload
-          # Restart the backend service
-          sudo systemctl restart backend.service
-          # Check the  status of the backend service
-          sudo systemctl status backend.service
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Test with pytest
+        if: github.ref == 'refs/heads/master'
+        run: |
+          pip install pytest
+          pytest
+      - name: Deploy to EC2
+        if: github.ref == 'refs/heads/master'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_NAME }}
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd new/FlaskApp/
+            # Pull latest changes from the repository and rebase local changes
+            git pull --rebase origin master
+            pipenv install
+            source /home/ubuntu/.local/share/virtualenvs/FlaskApp-WAvWhMNg/bin/activate 
+            # Stop the backend service
+            sudo systemctl stop backend.service
+            # Reload the systemd daemon
+            sudo systemctl daemon-reload
+            # Restart the backend service
+            sudo systemctl restart backend.service
+            # Check the status of the backend service
+            sudo systemctl status backend.service
