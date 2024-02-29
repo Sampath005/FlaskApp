@@ -1,5 +1,6 @@
 from flask import Flask
 import pandas as pd
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
