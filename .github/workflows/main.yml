@@ -50,7 +50,7 @@ jobs:
           # Install dependencies using pipenv
           pipenv install
           # Activate the virtual environment
-          pipenv shell
+          pipenv run
           # Stop the backend service
           sudo systemctl stop backend.service
           # Reload the systemd daemon
