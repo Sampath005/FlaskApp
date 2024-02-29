@@ -48,7 +48,7 @@ jobs:
           git pull --rebase origin master
           # Any additional deployment steps, e.g., restarting services, etc.
           # Install dependencies using pipenv
-          # pipenv install
+          pipenv install
           #  # Set non-interactive TERM variable
           # export TERM=dumb
           # # Activate the virtual environment
