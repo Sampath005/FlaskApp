@@ -1,6 +1,5 @@
 from flask import Flask
-import pandas as pd
-from dotenv import load_dotenv
+import scipy
 
 app = Flask(__name__)
 
